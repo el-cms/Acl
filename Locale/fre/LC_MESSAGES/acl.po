@@ -77,6 +77,10 @@ msgstr "le dossier %s est interdit en écriture"
 msgid "Created Aco node for controllers"
 msgstr "noeud ACO créé pour les contrôleurs"
 
+#: Controller/Component/AclManagerComponent.php:297
+msgid "Aco node '%s' created"
+msgstr "Le noeud ACO '%s' a été créé"
+
 #: Controller/Component/AclManagerComponent.php:312
 #, php-format
 msgid "Created Aco node for %s plugin"

@@ -225,7 +225,15 @@ class AclManagerComponent extends Component
         
         $aco =& $this->Acl->Aco;
         
-        $acos = $aco->find('all', array('recursive' => -1));
+        $acos = array();
+        
+        $controllers_aco = $aco->find('first', array('fields' => array('id'), 'conditions' => array('alias' => 'controllers'), 'recursive' => -1));
+        
+        if(!empty($controllers_aco))
+        {
+            $acos = $aco->children($controllers_aco['Aco']['id'], false, 'id');
+            array_unshift($acos, $controllers_aco);
+        }
         
         $existing_aco_paths = array();
         foreach($acos as $aco_node)
@@ -256,129 +264,56 @@ class AclManagerComponent extends Component
 	    
 	    $log = array();
 	    
-	    $controllers = $this->AclReflector->get_all_controllers();
+	    $missing_acos = $this->get_missing_acos();
 	    
-	    /******************************************
-	     * Create 'controllers' node if it does not exist
-	     */
-	    $root = $aco->node('controllers');
-		if (empty($root))
-		{
-		    /*
-		     * root node does not exist -> create it
-		     */
-		    
-			$aco->create(array('parent_id' => null, 'model' => null, 'alias' => 'controllers'));
-			$root              = $aco->save();
-			$root['Aco']['id'] = $aco->id;
-			
-			$log[] = __d('acl', 'Created Aco node for controllers');
-		}
-		else
-		{
-			$root = $root[0];
-		}
-	    
-	    foreach($controllers as $controller)
+	    foreach($missing_acos as $missing_aco)
 	    {
-	        $controller_name = $controller['name'];
+	        $aco_path_parts = explode('/', $missing_aco);
 	        
-	        if($controller_name !== 'App')
+	        $path        = '';
+	        $parent_node = null;
+	        
+	        foreach($aco_path_parts as $aco_path_part)
 	        {
-    	        $plugin_name     = $this->AclReflector->getPluginName($controller_name);
-    	        $pluginNode      = null;
-    	        
-    	        if(!empty($plugin_name))
-    	        {
-    	            /*
-    	             * Case of plugin controller
-    	             */
-    	            
-    	            $controller_name = $this->AclReflector->getPluginControllerName($controller_name);
-    	            
-    	            /******************************************
-    	             * Check plugin node
-    	             */
-    	            $pluginNode = $aco->node('controllers/' . $plugin_name);
-    	            if(empty($pluginNode))
-    	            {
-    	                /*
-    	                 * plugin node does not exist -> create it
-    	                 */
-    	                
-    	                $aco->create(array('parent_id' => $root['Aco']['id'], 'model' => null, 'alias' => $plugin_name));
-    					$pluginNode              = $aco->save();
-    					$pluginNode['Aco']['id'] = $aco->id;
-    					
-    					$log[] = sprintf(__d('acl', 'Created Aco node for %s plugin'), $plugin_name);
-    	            }
-    	        }
-    	        
-    	        
-    	        /******************************************
-    	         * Check controller node
-    	         */
-    	        $controllerNode = $aco->node('controllers/' . (!empty($plugin_name) ? $plugin_name . '/' : '') . $controller_name);
-                if(empty($controllerNode))
-                {
-                    /*
-                     * controller node does not exist -> create it
-                     */
-                    
-                    if(isset($pluginNode))
-                    {
-                        /*
-                         * The controller belongs to a plugin
-                         */
-    
-                        $plugin_node_aco_id = isset($pluginNode[0]) ? $pluginNode[0]['Aco']['id'] : $pluginNode['Aco']['id'];
-                        
-                        $aco->create(array('parent_id' => $plugin_node_aco_id, 'model' => null, 'alias' => $controller_name));
-    					$controllerNode              = $aco->save();
-    					$controllerNode['Aco']['id'] = $aco->id;
-    					
-    					$log[] = sprintf(__d('acl', 'Created Aco node for %s/%s'), $plugin_name, $controller_name);
-                    }
-                    else
-                    {
-                        /*
-                         * The controller is an app controller
-                         */
-                        
-                        $aco->create(array('parent_id' => $root['Aco']['id'], 'model' => null, 'alias' => $controller_name));
-    					$controllerNode              = $aco->save();
-    					$controllerNode['Aco']['id'] = $aco->id;
-    					
-    					$log[] = sprintf(__d('acl', 'Created Aco node for %s'), $controller_name);
-                    }
-                }
-                else
-    			{
-    				$controllerNode = $controllerNode[0];
-    			}
-    	        
-    	        
-    	        /******************************************
-    	         * Check controller actions node
-    	         */
-        	    $actions = $this->AclReflector->get_controller_actions($controller_name);
-        	    
-        	    foreach($actions as $action)
-        	    {
-        	        $actionNode = $aco->node('controllers/' . (!empty($plugin_name) ? $plugin_name . '/' : '') . $controller_name . '/' . $action);
-        	        
-        	        if(empty($actionNode))
-        	        {
-        	            /*
-        	             * action node does not exist -> create it
-        	             */
-        	            
-        	            $aco->create(array('parent_id' => $controllerNode['Aco']['id'], 'model' => null, 'alias' => $action));
-    					$methodNode = $aco->save();
-    					
-    					$log[] = sprintf(__d('acl', 'Created Aco node for %s'), (!empty($plugin_name) ? $plugin_name . '/' : '') . $controller_name . '/' . $action);
-        	        }
-        	    }
+	            $path .= '/' . $aco_path_part;
+	            
+	            $look_path = substr($path, 1);
+	            
+	            /*
+	             * Check if the ACO exists
+	             */
+	            $node = $aco->node($look_path);
+	            
+	            if(empty($node))
+	            {
+	                $parent_id = null;
+	                
+	                if(isset($parent_node))
+	                {
+	                    $parent_id = isset($parent_node) ? $parent_node[0]['Aco']['id'] : null;
+	                }
+
+	                $alias = substr($path, strrpos($path, '/') + 1);
+	                
+	                $aco->create(array('parent_id' => $parent_id, 'model' => null, 'alias' => $alias));
+	                if($aco->save())
+	                {
+	                    $log[] = sprintf(__d('acl', "Aco node '%s' created"), $look_path);
+	                    
+	                    /*
+	                     * The newly created ACO node is the parent of the next ones to create (if there are some left to create)
+	                     */
+	                    $new_node    = $aco->findById($aco->getLastInsertID());
+	                    if(!empty($new_node))
+	                    {
+	                        $parent_node = array($new_node);
+	                    }
+	                }
+	            }
+	            else
+	            {
+	                $parent_node = $node;
+	            }
 	        }
 	    }
 	    
@@ -432,7 +367,15 @@ class AclManagerComponent extends Component
         
         $aco =& $this->Acl->Aco;
         
-        $acos = $aco->find('all', array('recursive' => -1));
+        $acos = array();
+        
+        $controllers_aco = $aco->find('first', array('fields' => array('id'), 'conditions' => array('alias' => 'controllers'), 'recursive' => -1));
+        
+        if(!empty($controllers_aco))
+        {
+            $acos = $aco->children($controllers_aco['Aco']['id'], false, 'id');
+            array_unshift($acos, $controllers_aco);
+        }
         
         $existing_aco_paths = array();
         foreach($acos as $aco_node)
@@ -596,7 +539,7 @@ class AclManagerComponent extends Component
             	    
         	        $specific_permission = $this->Acl->Aro->Permission->find('first', array('conditions' => array('aro_id' => $aro_id, 'aco_id' => $aco_id)));
         	        
-        	        if($specific_permission !== false)
+        	        if(!empty($specific_permission))
         	        {
         	            if($this->Acl->Aro->Permission->delete(array('Permission.id' => $specific_permission['Permission']['id'])))
         	            {
@@ -673,7 +616,7 @@ class AclManagerComponent extends Component
     	    
     	    $specific_permission = $this->Acl->Aro->Permission->find('first', array('conditions' => array('aro_id' => $aro_id, 'aco_id' => $aco_id)));
     	    
-    	    if($specific_permission !== false)
+    	    if(!empty($specific_permission))
     	    {
     	        /*
     	         * Check the right (grant => true / deny => false) of this specific permission
@@ -720,7 +663,7 @@ class AclManagerComponent extends Component
 	    	    
     	    	$parent_permission = $this->Acl->Aro->Permission->find('first', array('conditions' => array('aro_id' => $aro_id, 'aco_id' => $parent_aco_id)));
 	    	    
-	    	    if($parent_permission !== false)
+    	    	if(!empty($parent_permission))
 	    	    {
 	    	        /*
 	    	         * Check the right (grant => true / deny => false) of this first parent permission

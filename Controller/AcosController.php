@@ -25,7 +25,7 @@ class AcosController extends AclAppController {
          */
         $controller_aco = $this->Aco->findByAlias('controllers');
         
-        if($controller_aco !== false)
+        if(!empty($controller_aco))
 	    {
 	        $this->set('actions_exist', true);
 	        

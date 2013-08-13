@@ -11,7 +11,7 @@ App::uses('AclRouter', 'Acl.Lib');
 /*
  * The model name used for the user role (typically 'Role' or 'Group')
  */
-Configure :: write('acl.aro.role.model', 'Group');
+Configure :: write('acl.aro.role.model', 'Role');
 
 /*
  * The primary key of the role model
@@ -48,13 +48,13 @@ Configure :: write('acl.aro.role.display_field', 'name');
  * You can add here role id(s) that are always allowed to access the ACL plugin (by bypassing the ACL check)
  * (This may prevent a user from being rejected from the ACL plugin after a ACL permission update)
  */
-Configure :: write('acl.role.access_plugin_role_ids', array(1));
+Configure :: write('acl.role.access_plugin_role_ids', array());
 
 /*
  * You can add here users id(s) that are always allowed to access the ACL plugin (by bypassing the ACL check)
  * (This may prevent a user from being rejected from the ACL plugin after a ACL permission update)
  */
-Configure :: write('acl.role.access_plugin_user_ids', array());
+Configure :: write('acl.role.access_plugin_user_ids', array(1));
 
 /*
  * The users table field used as username in the views
@@ -75,10 +75,10 @@ App :: build(array('locales' => App :: pluginPath('Acl') . DS . 'locale'));
 /*
  * Indicates whether the roles permissions page must load through Ajax
  */
-Configure :: write('acl.gui.roles_permissions.ajax', false);
+Configure :: write('acl.gui.roles_permissions.ajax', true);
 
 /*
  * Indicates whether the users permissions page must load through Ajax
  */
-Configure :: write('acl.gui.users_permissions.ajax', false);
+Configure :: write('acl.gui.users_permissions.ajax', true);
 ?>

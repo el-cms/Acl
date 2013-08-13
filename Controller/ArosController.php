@@ -54,7 +54,7 @@ class ArosController extends AclAppController
 			 */
 			$aro = $this->Aro->find('first', array('conditions' => array('model' => $role_model_name, 'foreign_key' => $role[$role_model_name][$this->_get_role_primary_key_name()])));
 			
-			if($aro === false)
+			if(empty($aro))
 			{
 				$missing_aros['roles'][] = $role;
 			}
@@ -68,7 +68,7 @@ class ArosController extends AclAppController
 			 */
 			$aro = $this->Aro->find('first', array('conditions' => array('model' => $user_model_name, 'foreign_key' => $user[$user_model_name][$this->_get_user_primary_key_name()])));
 			
-			if($aro === false)
+			if(empty($aro))
 			{
 				$missing_aros['users'][] = $user;
 			}
@@ -110,7 +110,7 @@ class ArosController extends AclAppController
 					 */
 					$parent_id = $this->Aro->field('id', array('model' => $role_model_name, 'foreign_key' => $user[$user_model_name][$this->_get_role_foreign_key_name()]));
 					
-					if($parent_id !== false)
+					if(!empty($parent_id))
 					{
 						$this->Aro->create(array('parent_id' 		=> $parent_id,
 													'model' 		=> $user_model_name,
@@ -178,7 +178,7 @@ class ArosController extends AclAppController
 	    {
 	    	$aro = $this->Acl->Aro->find('first', array('conditions' => array('model' => $user_model_name, 'foreign_key' => $user[$user_model_name][$this->_get_user_primary_key_name()])));
 	    	
-	        if($aro !== false)
+	    	if(!empty($aro))
 	        {
 	            $user['Aro'] = $aro['Aro'];
 	        }
@@ -199,7 +199,7 @@ class ArosController extends AclAppController
 	    
         $data = array($user_model_name => array($this->_get_user_primary_key_name() => $this->params['named']['user'], $this->_get_role_foreign_key_name() => $this->params['named']['role']));
 	    
-	    if($this->{$user_model_name}->save($data, false))
+	    if($this->{$user_model_name}->save($data))
 	    {
 	        $this->Session->setFlash(__d('acl', 'The user role has been updated'), 'flash_message', null, 'plugin_acl');
 	    }

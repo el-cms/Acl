@@ -1,9 +1,16 @@
 ACL Plugin for CakePHP 2.x
 ==========================
 
-Website: http://www.alaxos.net/blaxos/pages/view/plugin_acl
+Website: http://www.alaxos.net/blaxos/pages/view/plugin_acl_2.0
 Author: Nicolas Rod <nico@alaxos.com>
 License: http://www.opensource.org/licenses/mit-license.php The MIT License
+
+Version: 2.3.0
+--------------
+Date: 2013-05-02
+
+- corrected code to support CakePHP 2.3 find() function that returns an empty array instead of 'false' when no records are found in the datasource
+- updated the creation of ACOs to be more efficient when there are many records in the 'acos' datatable
 
 Version: 2.2.0
 --------------

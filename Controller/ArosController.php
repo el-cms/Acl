@@ -199,7 +199,7 @@ class ArosController extends AclAppController
 	    
         $data = array($user_model_name => array($this->_get_user_primary_key_name() => $this->params['named']['user'], $this->_get_role_foreign_key_name() => $this->params['named']['role']));
 	    
-	    if($this->{$user_model_name}->save($data))
+	    if($this->{$user_model_name}->save($data, false))
 	    {
 	        $this->Session->setFlash(__d('acl', 'The user role has been updated'), 'flash_message', null, 'plugin_acl');
 	    }

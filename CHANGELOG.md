@@ -1,9 +1,27 @@
 ACL Plugin for CakePHP 2.x
 ==========================
+This version of the ACL plugin has been done to support Twitter Bootstrap  Framework in its version 3 + Fonts Awesome.
 
-Website: http://www.alaxos.net/blaxos/pages/view/plugin_acl_2.0
-Author: Nicolas Rod <nico@alaxos.com>
-License: http://www.opensource.org/licenses/mit-license.php The MIT License
+### Changelog:
+#### 2013-08-26 : Modification #1 - cosmetic changes:
+ - Updated all files to replace spaces indents by tabs.
+ - Updated all files to remove extra new line in loops/if/... statements
+ - Deleted `webroot/img/`, `webroot/css` as I won't need them anymore
+ - Updated `webroot/js/acl_plugin.js`
+ - Updated views to work with TB3/Fonts Awesome:
+   - Views
+   - Elements
+   - Errors
+ - Started to add a `title_for_layout` var in controllers actions.
+
+__TODO__:
+ - Finish the `title_for_layout` stuff
+ - Clean code (comments, echo() outputing HTML only,...)
+
+## Original plugin infos :
+ - Website: http://www.alaxos.net/blaxos/pages/view/plugin_acl_2.0
+ - Author: Nicolas Rod <nico@alaxos.com>
+ - License: http://www.opensource.org/licenses/mit-license.php The MIT License
 
 Version: 2.3.0
 --------------

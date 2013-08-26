@@ -19,9 +19,9 @@ __TODO__:
  - Clean code (comments, echo() outputing HTML only,...)
 
 ## Original plugin infos :
-Website: http://www.alaxos.net/blaxos/pages/view/plugin_acl_2.0
-Author: Nicolas Rod <nico@alaxos.com>
-License: http://www.opensource.org/licenses/mit-license.php The MIT License
+ - Website: http://www.alaxos.net/blaxos/pages/view/plugin_acl_2.0
+ - Author: Nicolas Rod <nico@alaxos.com>
+ - License: http://www.opensource.org/licenses/mit-license.php The MIT License
 
 Version: 2.3.0
 --------------

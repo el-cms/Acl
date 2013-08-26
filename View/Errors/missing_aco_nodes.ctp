@@ -1,10 +1,5 @@
 <?php
-echo '<div class="error_page_message">';
 
-echo '	<span class="error">' . $message . '</span>';
-echo '	<p>&nbsp;</p>';
-echo '	<p>&nbsp;</p>';
-echo '	<p>' . $this->Html->link(__d('acl', 'go to homepage'), '/') . '</p>';
-
-echo '</div>';
+echo '<span class="alert alert-error">' . $message . '</span>';
+echo '<p class="text-center">' . $this->Html->link(__d('acl', 'Go to homepage'), '/') . '</p>';
 ?>

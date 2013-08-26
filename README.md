@@ -1,11 +1,20 @@
 ACL Plugin for CakePHP 2.0
 ===========================
+This version of the ACL plugin has been done to support Twitter Bootstrap  Framework in its version 3 + Fonts Awesome.
 
-Version: 2.3.0
-Date: 2013-05-02
-Author: Nicolas Rod <nico@alaxos.com>
-Website: http://www.alaxos.net/blaxos/pages/view/plugin_acl_2.0
-License: http://www.opensource.org/licenses/mit-license.php The MIT License
+
+Read the CHANGELOG for more infos.
+
+
+Date: 2013-08-26
+Author: Manuel Tancoigne <m.tancoigne@gmail.com>
+
+# Original readme :
+ - Version: 2.3.0
+ - Date: 2013-05-02
+ - Author: Nicolas Rod <nico@alaxos.com>
+ - Website: http://www.alaxos.net/blaxos/pages/view/plugin_acl_2.0
+ - License: http://www.opensource.org/licenses/mit-license.php The MIT License
 
 This CakePHP plugin is an interface to manage an ACL protected web application.
 

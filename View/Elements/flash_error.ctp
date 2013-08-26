@@ -1,4 +1,4 @@
-<div id="pluginAclflashMessage" class="error">
+<div class="alert alert-danger">
 ACL:
 <?php
 if(is_array($message))

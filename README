@@ -1,6 +1,15 @@
 ACL Plugin for CakePHP 2.0
 ===========================
+This version of the ACL plugin has been done to support Twitter Bootstrap  Framework in its version 3 + Fonts Awesome.
 
+
+Read the CHANGELOG for more infos.
+
+
+Date: 2013-08-26
+Author: Manuel Tancoigne <m.tancoigne@gmail.com>
+
+# Original readme :
 Version: 2.3.0
 Date: 2013-05-02
 Author: Nicolas Rod <nico@alaxos.com>

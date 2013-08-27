@@ -1,4 +1,5 @@
 <?php
+
 echo $this->element('design/header', array('no_acl_links' => true));
 
 echo '<p class="alert alert-warning"><i class="icon-warning-sign"></i> ' . __d('acl', 'Some controllers have been modified, resulting in actions that are not referenced as ACO in the database or ACO records that are obsolete') . '.</p>';
@@ -15,32 +16,25 @@ echo '</p>';
 echo '<div class="row">';
 echo '<div class="col-lg-6">';
 echo '<h3>' . __d('acl', 'Missing ACOs') . '</h3>';
-	if (count($missing_aco_nodes) > 0) {
-
-		echo '<p>';
-		echo $this->Html->nestedList($missing_aco_nodes);
-		echo '</p>';
+if (count($missing_aco_nodes) > 0) {
+	echo '<p>';
+	echo $this->Html->nestedList($missing_aco_nodes);
+	echo '</p>';
 } else {
 	echo '<div class="alert alert-info"><i class="icon-ok"></i> ' . __d('acl', 'There is no missing ACO node.') . '</div>';
-	}
-
+}
 echo '</div>';
 echo '<div class="col-lg-6">';
 echo '<h3>' . __d('acl', 'Obsolete ACOs') . '</h3>';
-	if (count($nodes_to_prune) > 0) {
-
-		echo '<p>';
-		echo $this->Html->nestedList($nodes_to_prune);
-		echo '</p>';
+if (count($nodes_to_prune) > 0) {
+	echo '<p>';
+	echo $this->Html->nestedList($nodes_to_prune);
+	echo '</p>';
 } else {
 	echo '<div class="alert alert-info"><i class="icon-ok"></i> ' . __d('acl', 'There is no obsolete ACO node.') . '</div>';
-	}
+}
 echo '</div>';
 echo '</div>';
-?>
 
-</div>
-
-<?php
 echo $this->element('design/footer');
 ?>

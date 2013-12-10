@@ -2,11 +2,11 @@
 
 echo $this->element('design/header', array('no_acl_links' => true));
 
-echo '<p class="alert alert-warning"><i class="icon-warning-sign"></i> ' . __d('acl', 'Some controllers have been modified, resulting in actions that are not referenced as ACO in the database or ACO records that are obsolete') . '.</p>';
+echo '<p class="alert alert-warning"><i class="fa fa-warning-sign"></i> ' . __d('acl', 'Some controllers have been modified, resulting in actions that are not referenced as ACO in the database or ACO records that are obsolete') . '.</p>';
 
 echo '<p>';
 echo __d('acl', 'You can update the ACOs by clicking on the following link') . ': ';
-echo $this->Html->link('<i class="icon-refresh"></i> ' . __d('acl', 'Synchronize ACOs'), '/admin/acl/acos/synchronize/run', array('class' => 'btn btn-primary', 'escape' => false));
+echo $this->Html->link('<i class="fa fa-refresh"></i> ' . __d('acl', 'Synchronize ACOs'), '/admin/acl/acos/synchronize/run', array('class' => 'btn btn-primary', 'escape' => false));
 echo '</p>';
 
 echo '<p>';
@@ -21,7 +21,7 @@ if (count($missing_aco_nodes) > 0) {
 	echo $this->Html->nestedList($missing_aco_nodes);
 	echo '</p>';
 } else {
-	echo '<div class="alert alert-info"><i class="icon-ok"></i> ' . __d('acl', 'There is no missing ACO node.') . '</div>';
+	echo '<div class="alert alert-info"><i class="fa fa-check"></i> ' . __d('acl', 'There is no missing ACO node.') . '</div>';
 }
 echo '</div>';
 echo '<div class="col-lg-6">';
@@ -31,7 +31,7 @@ if (count($nodes_to_prune) > 0) {
 	echo $this->Html->nestedList($nodes_to_prune);
 	echo '</p>';
 } else {
-	echo '<div class="alert alert-info"><i class="icon-ok"></i> ' . __d('acl', 'There is no obsolete ACO node.') . '</div>';
+	echo '<div class="alert alert-info"><i class="fa fa-check"></i> ' . __d('acl', 'There is no obsolete ACO node.') . '</div>';
 }
 echo '</div>';
 echo '</div>';

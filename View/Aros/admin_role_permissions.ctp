@@ -12,7 +12,7 @@ echo $this->element('Aros/links');
 <div>
 
 	<?php
-	echo $this->Html->link('<i class="icon-trash"></i> ' . __d('acl', 'Clear permissions table'), '/admin/acl/aros/empty_permissions', array('confirm' => __d('acl', 'Are you sure you want to delete all roles and users permissions ?'), 'escape' => false, 'class' => 'btn btn-danger'));
+	echo $this->Html->link('<i class="fa fa-trash-o"></i> ' . __d('acl', 'Clear permissions table'), '/admin/acl/aros/empty_permissions', array('confirm' => __d('acl', 'Are you sure you want to delete all roles and users permissions ?'), 'escape' => false, 'class' => 'btn btn-danger'));
 	?>
 
 
@@ -35,8 +35,8 @@ echo $this->element('Aros/links');
 //    $color = ($i % 2 == 0) ? 'color1' : 'color2';
 		echo '<tr>';
 		echo '  <td>' . $role[$role_model_name][$role_display_field] . '</td>';
-		echo '  <td class="text-center">' . $this->Html->link('<i class="icon-ok"></i>', '/admin/acl/aros/grant_all_controllers/' . $role[$role_model_name][$role_pk_name], array('escape' => false, 'class' => 'btn btn-link', 'confirm' => sprintf(__d('acl', "Are you sure you want to grant access to all actions of each controller to the role '%s' ?"), $role[$role_model_name][$role_display_field]))) . '</td>';
-		echo '  <td class="text-center">' . $this->Html->link('<i class="icon-remove"></i>', '/admin/acl/aros/deny_all_controllers/' . $role[$role_model_name][$role_pk_name], array('escape' => false, 'class' => 'btn btn-link', 'confirm' => sprintf(__d('acl', "Are you sure you want to deny access to all actions of each controller to the role '%s' ?"), $role[$role_model_name][$role_display_field]))) . '</td>';
+		echo '  <td class="text-center">' . $this->Html->link('<i class="fa fa-check"></i>', '/admin/acl/aros/grant_all_controllers/' . $role[$role_model_name][$role_pk_name], array('escape' => false, 'class' => 'btn btn-link', 'confirm' => sprintf(__d('acl', "Are you sure you want to grant access to all actions of each controller to the role '%s' ?"), $role[$role_model_name][$role_display_field]))) . '</td>';
+		echo '  <td class="text-center">' . $this->Html->link('<i class="fa fa-times"></i>', '/admin/acl/aros/deny_all_controllers/' . $role[$role_model_name][$role_pk_name], array('escape' => false, 'class' => 'btn btn-link', 'confirm' => sprintf(__d('acl', "Are you sure you want to deny access to all actions of each controller to the role '%s' ?"), $role[$role_model_name][$role_display_field]))) . '</td>';
 		echo '<tr>';
 
 //    $i++;
@@ -46,7 +46,7 @@ echo $this->element('Aros/links');
 
 <h3><?php echo __d('acl', 'Specific permissions') ?></h3>
 <p>
-	<em><?php echo __d('acl', 'Legend:'); ?></em> <i class="icon-ok"></i> = <?php echo __d('acl', 'Permission granted') ?> - <i class="icon-remove"></i> = <?php echo __d('acl', 'Permission denied') ?>
+	<em><?php echo __d('acl', 'Legend:'); ?></em> <i class="fa fa-check"></i> = <?php echo __d('acl', 'Permission granted') ?> - <i class="fa fa-times"></i> = <?php echo __d('acl', 'Permission denied') ?>
 </p>
 
 <table class="table table-condensed table-striped">
@@ -88,26 +88,26 @@ echo $this->element('Aros/links');
 							$this->Js->buffer('register_role_toggle_right(true, "' . $this->Html->url('/') . '", "right__' . $role[$role_model_name][$role_pk_name] . '_' . $controller_name . '_' . $ctrl_info['name'] . '", "' . $role[$role_model_name][$role_pk_name] . '", "", "' . $controller_name . '", "' . $ctrl_info['name'] . '")');
 
 //							echo $this->Html->image('/acl/img/design/tick.png', array('class' => 'pointer'));
-							echo '<i class="icon-ok pointer"></i>';
+							echo '<i class="fa fa-check pointer"></i>';
 						} else {
 							$this->Js->buffer('register_role_toggle_right(false, "' . $this->Html->url('/') . '", "right__' . $role[$role_model_name][$role_pk_name] . '_' . $controller_name . '_' . $ctrl_info['name'] . '", "' . $role[$role_model_name][$role_pk_name] . '", "", "' . $controller_name . '", "' . $ctrl_info['name'] . '")');
 
 //							echo $this->Html->image('/acl/img/design/cross.png', array('class' => 'pointer'));
-							echo '<i class="icon-remove pointer"></i>';
+							echo '<i class="fa fa-times pointer"></i>';
 						}
 					} else {
 						/*
 						 * The right of the action for the role is unknown
 						 */
 //						echo $this->Html->image('/acl/img/design/important16.png', array('title' => __d('acl', 'The ACO node is probably missing. Please try to rebuild the ACOs first.')));
-						echo '<i class="icon-warning-sign" title="' . __d('acl', 'The ACO node is probably missing. Please try to rebuild the ACOs first.') . '"></i>';
+						echo '<i class="fa fa-warning-sign" title="' . __d('acl', 'The ACO node is probably missing. Please try to rebuild the ACOs first.') . '"></i>';
 					}
 
 					echo '</span>';
 
 					echo ' ';
 //        	    	echo $this->Html->image('/acl/img/ajax/waiting16.gif', array('id' => 'right__' . $role[$role_model_name][$role_pk_name] . '_' . $controller_name . '_' . $ctrl_info['name'] . '_spinner', 'style' => 'display:none;'));
-					echo '<i class="icon-spinner icon-spin" title="' . __d('acl', 'Loading...') . '" id="' . 'right__' . $role[$role_model_name][$role_pk_name] . '_' . $controller_name . '_' . $ctrl_info['name'] . '_spinner' . '" style="display:none"></i>';
+					echo '<i class="fa fa-spinner fa fa-spin" title="' . __d('acl', 'Loading...') . '" id="' . 'right__' . $role[$role_model_name][$role_pk_name] . '_' . $controller_name . '_' . $ctrl_info['name'] . '_spinner' . '" style="display:none"></i>';
 
 					echo '</td>';
 				}
@@ -160,28 +160,28 @@ echo $this->element('Aros/links');
 								$this->Js->buffer('register_role_toggle_right(true, "' . $this->Html->url('/') . '", "right_' . $plugin_name . '_' . $role[$role_model_name][$role_pk_name] . '_' . $plugin_ctrler_name . '_' . $method['name'] . '", "' . $role[$role_model_name][$role_pk_name] . '", "' . $plugin_name . '", "' . $plugin_ctrler_name . '", "' . $method['name'] . '")');
 
 //								echo $this->Html->image('/acl/img/design/tick.png', array('class' => 'pointer'));
-								echo '<i class="icon-ok pointer"></i>';
+								echo '<i class="fa fa-check pointer"></i>';
 							} else {
 								//echo '<td>' . $this->Html->link($this->Html->image('/acl/img/design/cross.png'), '/admin/acl/aros/grant_role_permission/' . $role[$role_model_name][$role_pk_name] . '/plugin:' . $plugin_name .'/controller:' . $plugin_ctrler_name . '/action:' . $method['name'], array('escape' => false)) . '</td>';
 
 								$this->Js->buffer('register_role_toggle_right(false, "' . $this->Html->url('/') . '", "right_' . $plugin_name . '_' . $role[$role_model_name][$role_pk_name] . '_' . $plugin_ctrler_name . '_' . $method['name'] . '", "' . $role[$role_model_name][$role_pk_name] . '", "' . $plugin_name . '", "' . $plugin_ctrler_name . '", "' . $method['name'] . '")');
 
 //								echo $this->Html->image('/acl/img/design/cross.png', array('class' => 'pointer'));
-								echo '<i class="icon-remove pointer"></i>';
+								echo '<i class="fa fa-times pointer"></i>';
 							}
 						} else {
 							/*
 							 * The right of the action for the role is unknown
 							 */
 //							echo $this->Html->image('/acl/img/design/important16.png', array('title' => __d('acl', 'The ACO node is probably missing. Please try to rebuild the ACOs first.')));
-							echo '<i class="icon-warning-sign" title="' . __d('acl', 'The ACO node is probably missing. Please try to rebuild the ACOs first.') . '"></i>';
+							echo '<i class="fa fa-warning-sign" title="' . __d('acl', 'The ACO node is probably missing. Please try to rebuild the ACOs first.') . '"></i>';
 						}
 
 						echo '</span>';
 
 						echo ' ';
 //            	    	echo $this->Html->image('/acl/img/ajax/waiting16.gif', array('id' => 'right_' . $plugin_name . '_' . $role[$role_model_name][$role_pk_name] . '_' . $plugin_ctrler_name . '_' . $method['name'] . '_spinner', 'style' => 'display:none;'));
-						echo '<i class="icon-spinner icon-spin" title="' . __d('acl', 'Loading...') . '" id="' . 'right_' . $plugin_name . '_' . $role[$role_model_name][$role_pk_name] . '_' . $plugin_ctrler_name . '_' . $method['name'] . '_spinner' . '" style="display:none"></i>';
+						echo '<i class="fa fa-spinner fa fa-spin" title="' . __d('acl', 'Loading...') . '" id="' . 'right_' . $plugin_name . '_' . $role[$role_model_name][$role_pk_name] . '_' . $plugin_ctrler_name . '_' . $method['name'] . '_spinner' . '" style="display:none"></i>';
 
 						echo '</td>';
 					}

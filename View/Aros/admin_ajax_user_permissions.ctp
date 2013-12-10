@@ -18,10 +18,10 @@ echo $this->element('Aros/links');
 
 			echo $role[$role_model_name][$role_display_field] . ' ';
 			if ($role[$role_model_name][$role_pk_name] == $user[$user_model_name][$role_fk_name]) {
-				echo '<i class="icon-ok text-success"></i>';
+				echo '<i class="fa fa-check text-success"></i>';
 			} else {
 				$title = __d('acl', 'Update the user role');
-				echo $this->Html->link('<i class="icon-ok"></i>', array('plugin' => 'acl', 'controller' => 'aros', 'action' => 'update_user_role', 'user' => $user[$user_model_name][$user_pk_name], 'role' => $role[$role_model_name][$role_pk_name]), array('title' => $title, 'alt' => $title, 'escape' => false));
+				echo $this->Html->link('<i class="fa fa-check"></i>', array('plugin' => 'acl', 'controller' => 'aros', 'action' => 'update_user_role', 'user' => $user[$user_model_name][$user_pk_name], 'role' => $role[$role_model_name][$role_pk_name]), array('title' => $title, 'alt' => $title, 'escape' => false));
 			}
 
 			echo '</td>';
@@ -35,16 +35,16 @@ echo $this->element('Aros/links');
 <?php
 if ($user_has_specific_permissions) {
 	echo '<div class="alert alert-info">';
-	echo '<span class="icon-stack">
-				<i class="icon-circle icon-stack-base"></i>
-				<i class="icon-lightbulb icon-light"></i>
+	echo '<span class="fa fa-stack">
+				<i class="fa fa-circle fa fa-stack-base"></i>
+				<i class="fa fa-lightbulb fa fa-light"></i>
 			</span> ' . __d('acl', 'This user has specific permissions.');
-	echo ' ' . $this->Html->link('<i class="icon-remove"></i> ' . __d('acl', 'Reset to role permissions'), '/admin/acl/aros/clear_user_specific_permissions/' . $user[$user_model_name][$user_pk_name], array('confirm' => __d('acl', 'Are you sure you want to clear the permissions specific to this user ?'), 'escape' => false, 'class' => 'btn btn-xs btn-primary'));
+	echo ' ' . $this->Html->link('<i class="fa fa-times"></i> ' . __d('acl', 'Reset to role permissions'), '/admin/acl/aros/clear_user_specific_permissions/' . $user[$user_model_name][$user_pk_name], array('confirm' => __d('acl', 'Are you sure you want to clear the permissions specific to this user ?'), 'escape' => false, 'class' => 'btn btn-xs btn-primary'));
 	echo '</div>';
 }
 ?>
 <p>
-	<em><?php echo __d('acl', 'Legend:'); ?></em> <i class="icon-ok"></i> = <?php echo __d('acl', 'Permission granted') ?> - <i class="icon-remove"></i> = <?php echo __d('acl', 'Permission denied') ?>
+	<em><?php echo __d('acl', 'Legend:'); ?></em> <i class="fa fa-check"></i> = <?php echo __d('acl', 'Permission granted') ?> - <i class="fa fa-times"></i> = <?php echo __d('acl', 'Permission denied') ?>
 </p>
 <table class="table table-condensed table-striped">
 	<tr>
@@ -81,7 +81,7 @@ if ($user_has_specific_permissions) {
 				 * The right of the action for the role must still be loaded
 				 */
 //				echo $this->Html->image('/acl/img/ajax/waiting16.gif', array('title' => __d('acl', 'loading')));
-				echo '<i class="icon-spinner icon-spin" title="' . __d('acl', 'Loading...') . '"></i>';
+				echo '<i class="fa fa-spinner fa fa-spin" title="' . __d('acl', 'Loading...') . '"></i>';
 
 				if (!in_array($controller_name . '_' . $user[$user_model_name][$user_pk_name], $js_init_done)) {
 					$js_init_done[] = $controller_name . '_' . $user[$user_model_name][$user_pk_name];
@@ -92,7 +92,7 @@ if ($user_has_specific_permissions) {
 
 				echo ' ';
 //				echo $this->Html->image('/acl/img/ajax/waiting16.gif', array('id' => 'right__' . $user[$user_model_name][$user_pk_name] . '_' . $controller_name . '_' . $ctrl_info['name'] . '_spinner', 'style' => 'display:none;'));
-				echo '<i class="icon-spinner icon-spin" id="' . 'right__' . $user[$user_model_name][$user_pk_name] . '_' . $controller_name . '_' . $ctrl_info['name'] . '_spinner' . '" style="display:none" title="' . __d('acl', 'Loading...') . '"></i>';
+				echo '<i class="fa fa-spinner fa fa-spin" id="' . 'right__' . $user[$user_model_name][$user_pk_name] . '_' . $controller_name . '_' . $ctrl_info['name'] . '_spinner' . '" style="display:none" title="' . __d('acl', 'Loading...') . '"></i>';
 
 				echo '</td>';
 				echo '</tr>';
@@ -124,7 +124,7 @@ if ($user_has_specific_permissions) {
 					 * The right of the action for the role must still be loaded
 					 */
 //					echo $this->Html->image('/acl/img/ajax/waiting16.gif', array('title' => __d('acl', 'loading')));
-					echo '<i class="icon-spinner icon-spin" title="' . __d('acl', 'Loading...') . '"></i>';
+					echo '<i class="fa fa-spinner fa fa-spin" title="' . __d('acl', 'Loading...') . '"></i>';
 
 					if (!in_array($plugin_name . "_" . $plugin_ctrler_name . '_' . $user[$user_model_name][$user_pk_name], $js_init_done)) {
 						$js_init_done[] = $plugin_name . "_" . $plugin_ctrler_name . '_' . $user[$user_model_name][$user_pk_name];
@@ -135,7 +135,7 @@ if ($user_has_specific_permissions) {
 
 					echo ' ';
 //					echo $this->Html->image('/acl/img/ajax/waiting16.gif', array('id' => 'right_' . $plugin_name . '_' . $user[$user_model_name][$user_pk_name] . '_' . $plugin_ctrler_name . '_' . $method['name'] . '_spinner', 'style' => 'display:none;'));
-					echo '<i class="icon-spinner icon-spin" style="display:none" id="' . 'right_' . $plugin_name . '_' . $user[$user_model_name][$user_pk_name] . '_' . $plugin_ctrler_name . '_' . $method['name'] . '_spinner' . '" title="' . __d('acl', 'Loading...') . '"></i>';
+					echo '<i class="fa fa-spinner fa fa-spin" style="display:none" id="' . 'right_' . $plugin_name . '_' . $user[$user_model_name][$user_pk_name] . '_' . $plugin_ctrler_name . '_' . $method['name'] . '_spinner' . '" title="' . __d('acl', 'Loading...') . '"></i>';
 
 					echo '</td>';
 					echo '</tr>';

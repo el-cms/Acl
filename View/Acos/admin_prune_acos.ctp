@@ -18,7 +18,7 @@ if ($run) {
 		echo $this->Html->nestedList($logs);
 	} else {
 		echo '<div class="alert alert-info">';
-		echo '<i class="icon-info-sign"></i> ' . __d('acl', 'There was no actions ACOs to prune');
+		echo '<i class="fa fa-info-sign"></i> ' . __d('acl', 'There was no actions ACOs to prune');
 		echo '</div>';
 	}
 } else {
@@ -35,13 +35,13 @@ if ($run) {
 		echo '</p>';
 		echo '</div>';
 		echo '<div class="col-lg-6">';
-		echo $this->Html->link('<i class="icon-cut"></i> ' . __d('acl', 'Prune'), '/admin/acl/acos/prune_acos/run', array('escape' => false, 'class' => 'btn btn-primary'));
+		echo $this->Html->link('<i class="fa fa-cut"></i> ' . __d('acl', 'Prune'), '/admin/acl/acos/prune_acos/run', array('escape' => false, 'class' => 'btn btn-primary'));
 		echo ' ' . __d('acl', 'Clicking the link will not change or remove permissions for actions ACOs that are not obsolete.');
 		echo '</div>';
 		echo '</div>';
 	} else {
 		echo '<div class="alert alert-info">';
-		echo '<i class="icon-ok"></i> ' . __d('acl', 'There is no ACO node to delete');
+		echo '<i class="fa fa-check"></i> ' . __d('acl', 'There is no ACO node to delete');
 		echo '</div>';
 	}
 }

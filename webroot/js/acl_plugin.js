@@ -29,13 +29,13 @@ function init_register_user_controller_toggle_right(app_root_url, user_id, plugi
 					if (permissions[action] == true)
 					{
 //						icon_html = "<img src=\"" + app_root_url + "acl/img/design/tick.png"  + "\" class=\"pointer\" alt=\"granted\" />";
-						icon_html = "<i class=\"icon-ok\"></i>";
+						icon_html = "<i class=\"fa fa-check\"></i>";
 						start_granted = true;
 					}
 					else
 					{
 //						icon_html = "<img src=\"" + app_root_url + "acl/img/design/cross.png"  + "\" class=\"pointer\" alt=\"denied\" />";
-						icon_html = "<i class=\"icon-remove\"></i>";
+						icon_html = "<i class=\"fa fa-times\"></i>";
 
 						start_granted = false;
 					}
@@ -47,7 +47,7 @@ function init_register_user_controller_toggle_right(app_root_url, user_id, plugi
 				else
 				{
 //					icon_html = "<img src=\"" + app_root_url + "acl/img/design/important16.png"  + "\" alt=\"" + missing_aco_text + "\" title=\"" + missing_aco_text + "\" />";
-					icon_html = "<i class=\"icon-warning-sign\" title=\"" + missing_aco_text + "\"></i>";
+					icon_html = "<i class=\"fa fa-warning-sign\" title=\"" + missing_aco_text + "\"></i>";
 					$("#" + span_id).html(icon_html);
 				}
 			}
@@ -70,7 +70,7 @@ function register_user_toggle_right(start_granted, app_root_url, span_id, user_i
 		var url2 = app_root_url + "admin/acl/aros/deny_user_permission/" + user_id + plugin_param + "/controller:" + controller + "/action:" + action;
 	}
 
-	$("#" + span_id).toggle(function()
+	$("#" + span_id).jToggle(function()
 	{
 		$("#right_" + plugin + "_" + user_id + "_" + controller + "_" + action + "_spinner").show();
 
@@ -133,13 +133,13 @@ function init_register_role_controller_toggle_right(app_root_url, role_id, plugi
 					if (permissions[action] == true)
 					{
 //						icon_html = "<img src=\"" + app_root_url + "acl/img/design/tick.png"  + "\" class=\"pointer\" alt=\"granted\" />";
-						icon_html = "<i class=\"icon-ok\"></i>";
+						icon_html = "<i class=\"fa fa-check\"></i>";
 						start_granted = true;
 					}
 					else
 					{
 //						icon_html = "<img src=\"" + app_root_url + "acl/img/design/cross.png"  + "\" class=\"pointer\" alt=\"denied\" />";
-						icon_html = "<i class=\"icon-remove\"></i>";
+						icon_html = "<i class=\"fa fa-times\"></i>";
 						start_granted = false;
 					}
 
@@ -150,7 +150,7 @@ function init_register_role_controller_toggle_right(app_root_url, role_id, plugi
 				else
 				{
 //					icon_html = "<img src=\"" + app_root_url + "acl/img/design/important16.png"  + "\" alt=\"" + missing_aco_text + "\" title=\"" + missing_aco_text + "\" />";
-					icon_html = "<i class=\"icon-warning-sign\" title=\"" + missing_aco_text + "\"></i>";
+					icon_html = "<i class=\"fa fa-warning-sign\" title=\"" + missing_aco_text + "\"></i>";
 					$("#" + span_id).html(icon_html);
 				}
 			}
@@ -174,7 +174,7 @@ function register_role_toggle_right(start_granted, app_root_url, span_id, role_i
 		var url2 = app_root_url + "admin/acl/aros/deny_role_permission/" + role_id + plugin_param + "/controller:" + controller + "/action:" + action;
 	}
 
-	$("#" + span_id).toggle(function()
+	$("#" + span_id).jToggle(function()
 	{
 		$("#right_" + plugin + "_" + role_id + "_" + controller + "_" + action + "_spinner").show();
 
@@ -218,4 +218,30 @@ function ensure_ends_with(text, trailing_text)
 	}
 
 	return text;
+}
+
+jQuery.fn.jToggle = function(fn) {
+	// Save reference to arguments for access in closure
+		var args = arguments,
+			guid = fn.guid || jQuery.guid++,
+			i = 0,
+			toggler = function( event ) {
+				// Figure out which function to execute
+				var lastToggle = ( jQuery._data( this, "lastToggle" + fn.guid ) || 0 ) % i;
+				jQuery._data( this, "lastToggle" + fn.guid, lastToggle + 1 );
+
+				// Make sure that clicks stop
+				event.preventDefault();
+
+				// and execute the function
+				return args[ lastToggle ].apply( this, arguments ) || false;
+			};
+
+		// link all the functions, so any of them can unbind this click handler
+		toggler.guid = guid;
+		while ( i < args.length ) {
+			args[ i++ ].guid = guid;
+		}
+
+		return this.click( toggler );
 }

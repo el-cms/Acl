@@ -8,14 +8,14 @@ echo $this->element('design/header', array('no_acl_links' => true));
 	if(isset($model_is_not_requester))
 	{
 		echo '<p class="alert alert-warning">';
-		echo '<i class="icon-warning-sign"></i> '.sprintf(__d('acl', 'The <em>%s</em> model is not configured to act as an <em>ACL requester</em>'), Configure :: read('acl.aro.user.model')) . '</p>';
+		echo '<i class="fa fa-warning-sign"></i> '.sprintf(__d('acl', 'The <em>%s</em> model is not configured to act as an <em>ACL requester</em>'), Configure :: read('acl.aro.user.model')) . '</p>';
 		echo '</p>';
 	}
 	
 	if(isset($role_is_not_requester))
 	{
 		echo '<p class="alert alert-warning">';
-		echo '<i class="icon-warning-sign"></i> '.sprintf(__d('acl', 'The <em>%s</em> model is not configured to act as an <em>ACL requester</em>'), Configure :: read('acl.aro.role.model')) . '</p>';
+		echo '<i class="fa fa-warning-sign"></i> '.sprintf(__d('acl', 'The <em>%s</em> model is not configured to act as an <em>ACL requester</em>'), Configure :: read('acl.aro.role.model')) . '</p>';
 		echo '</p>';
 	}
 	

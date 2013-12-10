@@ -57,7 +57,7 @@ if ($run) {
 		$has_aco_to_sync = true;
 	}
 	echo '<div class="alert alert-info">';
-		echo '<i class="icon-info-sign"></i> '. __d('acl', 'There is no missing ACO.');
+		echo '<i class="fa fa-info-sign"></i> '. __d('acl', 'There is no missing ACO.');
 		echo '</div>';
 	echo '</div>';
 
@@ -72,7 +72,7 @@ if ($run) {
 	}
 	else{
 		echo '<div class="alert alert-info">';
-		echo '<i class="icon-info-sign"></i> '. __d('acl', 'There is no ACO to prune.');
+		echo '<i class="fa fa-info-sign"></i> '. __d('acl', 'There is no ACO to prune.');
 		echo '</div>';
 	}
 	echo '</div>';
@@ -81,12 +81,12 @@ if ($run) {
 	echo '<h3>' . __d('acl', 'Synchronize') . '</h3>';
 	if ($has_aco_to_sync) {
 		echo '<p>';
-		echo $this->Html->link('<i class="icon-refresh"></i> ' . __d('acl', 'Synchronize'), '/admin/acl/acos/synchronize/run', array('class'=>'btn btn-primary','escape' => false));
+		echo $this->Html->link('<i class="fa fa-refresh"></i> ' . __d('acl', 'Synchronize'), '/admin/acl/acos/synchronize/run', array('class'=>'btn btn-primary','escape' => false));
 		echo ' ' . __d('acl', 'Clicking the link will not change or remove permissions for existing actions ACOs.');
 		echo '</p>';
 	} else {
 		echo '<div class="alert alert-success">';
-		echo '<i class="icon-info-sign"></i> ' . __d('acl', 'The ACO datatable is already synchronized');
+		echo '<i class="fa fa-info-sign"></i> ' . __d('acl', 'The ACO datatable is already synchronized');
 		echo '</div>';
 	}
 	echo '</div>';

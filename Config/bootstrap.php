@@ -12,7 +12,7 @@ App::uses('AclRouter', 'Acl.Lib');
 /*
  * The model name used for the user role (typically 'Role' or 'Group')
  */
-Configure :: write('acl.aro.role.model', 'Role');
+Configure :: write('acl.aro.role.model', 'Group');
 
 /*
  * The primary key of the role model

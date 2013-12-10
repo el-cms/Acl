@@ -12,10 +12,10 @@ if (isset($acl_error)) {
 	}
 
 //  echo $this->Html->image('/acl/img/design/important16.png', array('class' => 'pointer', 'alt' => $title, 'title' => $title));
-	echo '<i class="icon-warning-sign pointer" title="' . $title . '"></i>';
+	echo '<i class="fa fa-warning-sign pointer" title="' . $title . '"></i>';
 } else {
 //  echo $this->Html->image('/acl/img/design/cross.png', array('class' => 'pointer'));
-	echo '<i class="icon-remove pointer"></i>';
+	echo '<i class="fa fa-times pointer"></i>';
 }
 
 echo '</span>';

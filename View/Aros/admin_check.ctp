@@ -6,11 +6,11 @@ echo $this->element('Aros/links');
 <?php
 if (count($missing_aros['roles']) > 0 || count($missing_aros['users']) > 0) {
 	echo '<p>';
-	echo $this->Html->link('<i class="icon-plus-sign"></i> ' . __d('acl', 'Build'), '/admin/acl/aros/check/run', array('class' => 'btn btn-primary', 'escape' => false));
+	echo $this->Html->link('<i class="fa fa-plus-sign"></i> ' . __d('acl', 'Build'), '/admin/acl/aros/check/run', array('class' => 'btn btn-primary', 'escape' => false));
 	echo '</p>';
 } else {
 	echo '<div class="alert alert-info">';
-	echo '<i class="icon-info-sign"></i> ' . __d('acl', 'There is no missing ARO.');
+	echo '<i class="fa fa-info-sign"></i> ' . __d('acl', 'There is no missing ARO.');
 	echo '</div>';
 }
 ?>
